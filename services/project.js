@@ -19,12 +19,14 @@ async function create(project) {
   // const result = await db.query(`INSERT INTO 'projects'
   // (title, github_link, live_link, description, image_url, achievements)
   // VALUES
-  // (${project.title}, ${project.githublink}, ${project.livelink}, ${project.description}, ${project.imageurl}, ${project.achievements})`);
+  // ('${project.title}', '${project.github_link}', '${project.live_link}', '${project.description}', '${project.image_url}', '${project.achievements}')`);
 
-  const result = await db.query(`SELECT 'projects'
+  const result = await db.query(`INSERT INTO projects
   (title, github_link, live_link, description, image_url, achievements)
   VALUES
-  (${project.title}, ${project.githublink}, ${project.livelink}, ${project.description}, ${project.imageurl}, ${project.achievements})`);
+  (?, ?, ?, ?, ?, ?)`, [project.title, project.github_link, project.live_link, project.description, project.image_url, project.achievements]);
+
+  // const result = await db.query(`SELECT title FROM projects`);
 
   let message = `Error in creating project`;
 
