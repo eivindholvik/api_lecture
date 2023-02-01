@@ -20,4 +20,22 @@ router.post("/", async function (req, res, next) {
   }
 });
 
+router.put("/:id", async function (req, res, next) {
+  try {
+    res.json(await project.update(req.params.id, req.body))
+  } catch (e) {
+    console.error(`Error while updating projects: ${e.message}`);
+    next(e);
+  }
+});
+
+router.delete("/:id", async function (req, res, next) {
+  try {
+    res.json(await project.remove(req.params.id));
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+})
+
 module.exports = router;
